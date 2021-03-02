@@ -10,7 +10,7 @@ import Header from "./components/header/Header";
 const App = (props) => {
   return (
     <div className="App">
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Provider store={store}>
           <Header />
           <Route path={"/profile/:id"} render={() => <ProfileContainer />} />
