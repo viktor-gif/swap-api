@@ -6,7 +6,7 @@ const People = (props) => {
   return (
     <nav className={s.navbar}>
       <div className={s.item}>
-        <NavLink to="/profile/" activeClassName={s.active}>
+        <NavLink to="/profile/1/" activeClassName={s.active}>
           Profile
         </NavLink>
       </div>

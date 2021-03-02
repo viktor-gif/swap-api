@@ -8,6 +8,9 @@ export const peopleAPI = {
   getPeople() {
     return instance.get(`people`);
   },
+  searchPeople(text) {
+    return instance.get(`people/?search=${text}`);
+  },
 };
 
 export const profileAPI = {

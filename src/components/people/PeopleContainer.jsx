@@ -2,8 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import People from "./People";
 import { compose } from "redux";
-import { getPeople } from "../../redux/people-reducer";
-import s from "./People.module.css";
+import {
+  getPeople,
+  updateValue,
+  getSearchingPeople,
+} from "../../redux/people-reducer";
 
 class PeopleContainer extends React.Component {
   componentDidMount() {
@@ -13,12 +16,12 @@ class PeopleContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1>People-page</h1>
-        <div className={s.searchingBlock}>
-          <input type="text" placeholder="Enter searching name" />
-        </div>
-        <People people={this.props.people} />
-        {console.log(this.props.people)}
+        <People
+          people={this.props.people}
+          newText={this.props.newText}
+          updateValue={this.props.updateValue}
+          getSearchingPeople={this.props.getSearchingPeople}
+        />
       </div>
     );
   }
@@ -27,9 +30,10 @@ class PeopleContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     people: state.peoplePage.people,
+    newText: state.peoplePage.newText,
   };
 };
 
-export default compose(connect(mapStateToProps, { getPeople }))(
-  PeopleContainer
-);
+export default compose(
+  connect(mapStateToProps, { getPeople, updateValue, getSearchingPeople })
+)(PeopleContainer);
