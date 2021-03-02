@@ -1,5 +1,7 @@
 .personProperty {
   padding: 5px;
   margin: 5px;
-  background-color: #a9a9a9;
+}
+.person {
+  background-color: #f0f0f0;
 }

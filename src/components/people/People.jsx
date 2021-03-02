@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./People.module.css";
 import { NavLink } from "react-router-dom";
+import magnifier from "../../img/magnifier.png";
 
 const People = (props) => {
+  let [activeInput, setActiveInput] = useState(false);
+
+  const onFocusInput = () => {
+    setActiveInput(true);
+  };
+  const onBlurInput = () => {
+    setActiveInput(false);
+  };
+
   let inputSearch = React.createRef();
 
   let onValueChange = (e) => {
@@ -24,14 +34,22 @@ const People = (props) => {
     <div>
       <h1>People-page</h1>
       <div className={s.searchingBlock}>
-        <input
-          type="text"
-          placeholder="Enter searching name"
-          value={props.newText}
-          onChange={onValueChange}
-          ref={inputSearch}
-          onKeyDown={searchPeopleKeyDown}
-        />
+        <div>
+          <div className={s.inputBlock}>
+            <input
+              className={s.unActiveInput + " " + (activeInput && s.activeInput)}
+              type="text"
+              placeholder="Enter searching name"
+              value={props.newText}
+              onChange={onValueChange}
+              ref={inputSearch}
+              onKeyDown={searchPeopleKeyDown}
+              onFocus={onFocusInput}
+              onBlur={onBlurInput}
+            />
+            {!activeInput && <img src={magnifier} />}
+          </div>
+        </div>
         <button onClick={searchPeople}>search</button>
       </div>
       <PeopleItems people={props.people} />

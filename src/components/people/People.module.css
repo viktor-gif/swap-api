@@ -3,15 +3,16 @@
   padding: 25px;
   border-bottom: 2px solid #999;
 }
-.searchingBlock input {
+/* .searchingBlock input {
   width: 300px;
   padding: 5px 10px;
   font-size: 20px;
   background-color: #f0f0f0;
   color: #333;
   border-radius: 5px;
-}
+} */
 .searchingBlock button {
+  margin-top: 10px;
   padding: 7px;
   font-size: 15px;
   background-color: #333;
@@ -19,4 +20,28 @@
   margin-left: 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.inputBlock {
+  display: inline-block;
+  position: relative;
+}
+.unActiveInput {
+  width: 300px;
+  padding: 5px 10px 5px 35px;
+  font-size: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 5px;
+}
+.activeInput {
+  padding: 5px 10px;
+  width: 325px;
+}
+.inputBlock img {
+  width: 25px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  z-index: 100;
 }
