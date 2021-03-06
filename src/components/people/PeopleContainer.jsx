@@ -6,11 +6,14 @@ import {
   getPeople,
   updateValue,
   getSearchingPeople,
+  getPlanets,
 } from "../../redux/people-reducer";
 
 class PeopleContainer extends React.Component {
+  componentWillMount() {}
   componentDidMount() {
     this.props.getPeople();
+    this.props.getPlanets();
   }
 
   render() {
@@ -21,6 +24,7 @@ class PeopleContainer extends React.Component {
           newText={this.props.newText}
           updateValue={this.props.updateValue}
           getSearchingPeople={this.props.getSearchingPeople}
+          planets={this.props.planets}
         />
       </div>
     );
@@ -31,9 +35,15 @@ let mapStateToProps = (state) => {
   return {
     people: state.peoplePage.people,
     newText: state.peoplePage.newText,
+    planets: state.peoplePage.planets,
   };
 };
 
 export default compose(
-  connect(mapStateToProps, { getPeople, updateValue, getSearchingPeople })
+  connect(mapStateToProps, {
+    getPeople,
+    updateValue,
+    getSearchingPeople,
+    getPlanets,
+  })
 )(PeopleContainer);

@@ -3,7 +3,7 @@ import { profileAPI } from "../api/Api";
 const SET_PROFILE = "SET_PROFILE";
 
 let initialState = {
-  profileData: {},
+  profileData: null,
 };
 
 const profileReducer = (state = initialState, action) => {

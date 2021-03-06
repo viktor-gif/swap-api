@@ -30,6 +30,12 @@ const People = (props) => {
     }
   };
 
+  if (!props.people) {
+    return <div>Loading</div>;
+  }
+
+  // console.log(props.people);
+
   return (
     <div>
       <h1>People-page</h1>
@@ -47,25 +53,41 @@ const People = (props) => {
               onFocus={onFocusInput}
               onBlur={onBlurInput}
             />
-            {!activeInput && <img src={magnifier} />}
+            {!activeInput && <img src={magnifier} alt="mf" />}
           </div>
         </div>
         <button onClick={searchPeople}>search</button>
       </div>
-      <PeopleItems people={props.people} />
+      <PeopleItems people={props.people} planets={props.planets} />
     </div>
   );
 };
-
+// props.people.indexOf(p)
 const PeopleItems = (props) => {
-  let peopleItems = props.people.map((p) => {
+  // console.log(props.planets[props.people[2].homeworld.slice(29, -1)].name);
+
+  if (!props.planets) {
+    return <div>Loading</div>;
+  }
+
+  let peopleItems = props.people.map((ppl) => {
+    let indexPeople = ppl.url.slice(28, -1);
+    let indexPlanet = +ppl.homeworld.slice(29, -1);
+    console.log(indexPeople);
+    console.log(indexPlanet);
+    // debugger;
     return (
-      <div key={p.name} className={s.person}>
-        <NavLink to={"/profile/" + (+props.people.indexOf(p) + 1)}>
-          <div>{p.name}</div>
+      <div key={ppl.name} className={s.person}>
+        <NavLink to={"/profile/" + indexPeople}>
+          {" "}
+          <div>{ppl.name}</div>
         </NavLink>
-        <div>{p.gender}</div>
-        <div>{p.homeworld}</div>
+        <div>{ppl.gender}</div>
+        <div>
+          {props.planets[indexPlanet]
+            ? props.planets[indexPlanet].name
+            : "Loading..."}
+        </div>
       </div>
     );
   });
@@ -74,3 +96,5 @@ const PeopleItems = (props) => {
 };
 
 export default People;
+// props.planets[p.homeworld.slice(29, -1)].name
+//.homeworld.slice(29, -1)

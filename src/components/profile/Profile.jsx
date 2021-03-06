@@ -1,10 +1,18 @@
+import { computeHeadingLevel } from "@testing-library/dom";
 import React from "react";
+import { getPlanets } from "../../redux/people-reducer";
 import s from "./Profile.module.css";
 
-const People = ({ profileData }) => {
+const People = ({ profileData, planets }) => {
   if (!profileData) {
     return <div>Loading...</div>;
   }
+  if (!planets) {
+    return <div>Loading...</div>;
+  }
+  console.log(planets);
+  const indexPlanet = profileData.homeworld.slice(29, -1);
+  console.log(indexPlanet);
   return (
     <div className={s.person}>
       <div className={s.personProperty}>
@@ -32,7 +40,7 @@ const People = ({ profileData }) => {
         <b>Gender</b>: {profileData.gender}
       </div>
       <div className={s.personProperty}>
-        <b>HomeWorld</b>: {profileData.homeworld}
+        <b>HomeWorld</b>: {planets[indexPlanet].name}
       </div>
       <div className={s.personProperty}>
         <b>Vehicles</b>: {profileData.vehicles}

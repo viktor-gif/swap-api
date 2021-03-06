@@ -3,11 +3,12 @@ import { peopleAPI } from "../api/Api";
 const SET_PEOPLE = "SET_PEOPLE";
 const SEARCH_PEOPLE = "SEARCH_PEOPLE";
 const SET_NEW_TEXT = "SET_NEW_TEXT";
+const SET_PLANETS = "SET_PLANETS";
 
 let initialState = {
-  people: [],
-  // searchingPeople: [],
+  people: null,
   newText: "",
+  planets: null,
 };
 
 const peopleReducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const peopleReducer = (state = initialState, action) => {
         ...state,
         newText: action.newText,
       };
+    case SET_PLANETS:
+      return {
+        ...state,
+        planets: action.planets,
+      };
     default:
       return state;
   }
@@ -39,12 +45,14 @@ export const setSearchingPeople = (people) => ({
   people,
 });
 export const updateValue = (newText) => ({ type: SET_NEW_TEXT, newText });
+export const setPlanets = (planets) => ({ type: SET_PLANETS, planets });
 
 //Tunk-creators
 export const getPeople = () => {
   return (dispatch) => {
     peopleAPI.getPeople().then((response) => {
-      dispatch(setPeople(response.data.results));
+      let people = response.data.results;
+      dispatch(setPeople(people));
     });
   };
 };
@@ -52,6 +60,13 @@ export const getSearchingPeople = (text) => {
   return (dispatch) => {
     peopleAPI.searchPeople(text).then((response) => {
       dispatch(setSearchingPeople(response.data.results));
+    });
+  };
+};
+export const getPlanets = () => {
+  return (dispatch) => {
+    peopleAPI.getPlanets().then((response) => {
+      dispatch(setPlanets(response.data.results));
     });
   };
 };

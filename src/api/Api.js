@@ -11,6 +11,9 @@ export const peopleAPI = {
   searchPeople(text) {
     return instance.get(`people/?search=${text}`);
   },
+  getPlanets() {
+    return instance.get(`planets`);
+  },
 };
 
 export const profileAPI = {
@@ -18,3 +21,5 @@ export const profileAPI = {
     return instance.get(`people/${id}`);
   },
 };
+
+// http://swapi.dev/api/planets/?page=2
