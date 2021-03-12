@@ -51,8 +51,7 @@ export const setPlanets = (planets) => ({ type: SET_PLANETS, planets });
 export const getPeople = () => {
   return (dispatch) => {
     peopleAPI.getPeople().then((response) => {
-      let people = response.data.results;
-      dispatch(setPeople(people));
+      dispatch(setPeople(response.data.results));
     });
   };
 };

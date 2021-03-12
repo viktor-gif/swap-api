@@ -1,24 +1,29 @@
 import * as axios from "axios";
 
-const instance = axios.create({
-  baseURL: `https://swapi.dev/api/`,
-});
-
 export const peopleAPI = {
   getPeople() {
-    return instance.get(`people`);
+    return axios.get(`https://swapi.dev/api/people`);
   },
   searchPeople(text) {
-    return instance.get(`people/?search=${text}`);
+    return axios.get(`https://swapi.dev/api/people/?search=${text}`);
   },
   getPlanets() {
-    return instance.get(`planets`);
+    return axios.get(`https://swapi.dev/api/planets`);
   },
 };
 
 export const profileAPI = {
   getProfile(id) {
-    return instance.get(`people/${id}`);
+    return axios.get(`https://swapi.dev/api/people/${id}`);
+  },
+  getFilms() {
+    return axios.get(`https://swapi.dev/api/films`);
+  },
+  getFilm(api) {
+    return axios.get(api);
+  },
+  getVehicles() {
+    return axios.get(`https://swapi.dev/api/vehicles`);
   },
 };
 

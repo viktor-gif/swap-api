@@ -34,8 +34,6 @@ const People = (props) => {
     return <div>Loading</div>;
   }
 
-  // console.log(props.people);
-
   return (
     <div>
       <h1>People-page</h1>
@@ -62,10 +60,7 @@ const People = (props) => {
     </div>
   );
 };
-// props.people.indexOf(p)
 const PeopleItems = (props) => {
-  // console.log(props.planets[props.people[2].homeworld.slice(29, -1)].name);
-
   if (!props.planets) {
     return <div>Loading</div>;
   }
@@ -73,9 +68,6 @@ const PeopleItems = (props) => {
   let peopleItems = props.people.map((ppl) => {
     let indexPeople = ppl.url.slice(28, -1);
     let indexPlanet = +ppl.homeworld.slice(29, -1);
-    console.log(indexPeople);
-    console.log(indexPlanet);
-    // debugger;
     return (
       <div key={ppl.name} className={s.person}>
         <NavLink to={"/profile/" + indexPeople}>
@@ -96,5 +88,3 @@ const PeopleItems = (props) => {
 };
 
 export default People;
-// props.planets[p.homeworld.slice(29, -1)].name
-//.homeworld.slice(29, -1)
