@@ -22,8 +22,8 @@ export const profileAPI = {
   getFilm(api) {
     return axios.get(api);
   },
-  getVehicles() {
-    return axios.get(`https://swapi.dev/api/vehicles`);
+  getVehicle(api) {
+    return axios.get(api);
   },
 };
 

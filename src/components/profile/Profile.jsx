@@ -5,10 +5,14 @@ class Profile extends React.Component {
   componentDidMount() {
     if (
       this.props.profileData &&
-      this.props.profileData.films.length === this.props.films.length
+      this.props.profileData.films.length === this.props.films.length &&
+      this.props.profileData.vehicles.length === this.props.vehicles.length
     ) {
       this.props.profileData.films.forEach((item) => {
         this.props.getFilm(item);
+      });
+      this.props.profileData.vehicles.forEach((item) => {
+        this.props.getVehicle(item);
       });
     }
   }
@@ -16,21 +20,29 @@ class Profile extends React.Component {
     if (prevProps.profileData !== this.props.profileData) {
       if (this.props.profileData) {
         let films = this.props.profileData.films;
+        let vehicles = this.props.profileData.vehicles;
 
         films.forEach((item) => {
           this.props.getFilm(item);
+        });
+        vehicles.forEach((item) => {
+          this.props.getVehicle(item);
         });
       }
     }
   }
   componentWillUnmount() {
     this.props.clearFilms();
+    this.props.clearVehicles();
   }
 
   render() {
+    console.log(this.props);
     const profileData = this.props.profileData;
     const planets = this.props.planets;
     const films = this.props.films;
+    const vehicles = this.props.vehicles;
+    console.log(vehicles);
     if (!profileData) {
       return <div>Loading...</div>;
     }
@@ -41,7 +53,10 @@ class Profile extends React.Component {
     const indexPlanet = profileData.homeworld.slice(29, -1);
 
     const filmsNames = films.map((item) => {
-      return <span>"{item.title}", </span>;
+      return <li key={item.title}>{item.title}</li>;
+    });
+    const vehiclesNames = vehicles.map((item) => {
+      return <li key={item.name}>{item.name}</li>;
     });
 
     return (
@@ -75,10 +90,12 @@ class Profile extends React.Component {
           {planets[indexPlanet] ? planets[indexPlanet].name : "Loading..."}
         </div>
         <div className={s.personProperty}>
-          <b>Vehicles</b>: {profileData.vehicles}
+          <b>Vehicles</b>:{" "}
+          {vehicles.length > 0 ? <ul>{vehiclesNames}</ul> : "Loading..."}
         </div>
         <div className={s.personProperty}>
-          <b>Films</b>: {films.length > 0 ? filmsNames : "Loading..."}
+          <b>Films</b>:{" "}
+          {films.length > 0 ? <ul>{filmsNames}</ul> : "Loading..."}
         </div>
       </div>
     );

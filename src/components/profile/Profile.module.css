@@ -5,3 +5,6 @@
 .person {
   background-color: #f0f0f0;
 }
+ul {
+  display: inline-block;
+}

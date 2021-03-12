@@ -5,8 +5,9 @@ import { compose } from "redux";
 import {
   getProfile,
   getFilm,
-  getVehicles,
   clearFilms,
+  getVehicle,
+  clearVehicles,
 } from "../../redux/profile-reducer";
 import { getPlanets } from "../../redux/people-reducer";
 import { withRouter } from "react-router-dom";
@@ -16,7 +17,7 @@ class ProfileContainer extends React.Component {
     let promise = new Promise(() => {
       this.props.getProfile(this.props.match.params.id);
     });
-    promise.then(this.props.getPlanets()).then(this.props.getVehicles());
+    promise.then(this.props.getPlanets());
   }
 
   render() {
@@ -30,6 +31,8 @@ class ProfileContainer extends React.Component {
           vehicles={this.props.vehicles}
           getFilm={this.props.getFilm}
           clearFilms={this.props.clearFilms}
+          getVehicle={this.props.getVehicle}
+          clearVehicles={this.props.clearVehicles}
         />
       </div>
     );
@@ -50,8 +53,9 @@ export default compose(
     getProfile,
     getPlanets,
     getFilm,
-    getVehicles,
     clearFilms,
+    getVehicle,
+    clearVehicles,
   }),
   withRouter
 )(ProfileContainer);

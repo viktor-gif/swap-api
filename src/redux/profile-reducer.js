@@ -2,13 +2,14 @@ import { profileAPI } from "../api/Api";
 
 const SET_PROFILE = "SET_PROFILE";
 const SET_FILM = "SET_FILM";
-const SET_VEHICLES = "SET_VEHICLES";
+const SET_VEHICLE = "SET_VEHICLE";
 const CLEAR_FILMS = "CLEAR_FILMS";
+const CLEAR_VEHICLES = "CLEAR_VEHICLES";
 
 let initialState = {
   profileData: null,
   films: [],
-  vehicles: null,
+  vehicles: [],
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -28,11 +29,15 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         films: state.films.concat(action.film),
       };
-
-    case SET_VEHICLES:
+    case SET_VEHICLE:
       return {
         ...state,
-        vehicles: action.vehicles,
+        vehicles: state.vehicles.concat(action.vehicle),
+      };
+    case CLEAR_VEHICLES:
+      return {
+        ...state,
+        vehicles: [],
       };
     default:
       return state;
@@ -42,8 +47,8 @@ const profileReducer = (state = initialState, action) => {
 export const setProfile = (profile) => ({ type: SET_PROFILE, profile });
 export const setFilm = (film) => ({ type: SET_FILM, film });
 export const clearFilms = () => ({ type: CLEAR_FILMS });
-export const setVehicles = (vehicles) => ({ type: SET_VEHICLES, vehicles });
-
+export const setVehicle = (vehicle) => ({ type: SET_VEHICLE, vehicle });
+export const clearVehicles = () => ({ type: CLEAR_VEHICLES });
 //Tunk-creators
 
 export const getProfile = (id) => {
@@ -60,10 +65,10 @@ export const getFilm = (api) => {
     });
   };
 };
-export const getVehicles = () => {
+export const getVehicle = (api) => {
   return (dispatch) => {
-    profileAPI.getVehicles().then((response) => {
-      dispatch(setVehicles(response.data.results));
+    profileAPI.getVehicle(api).then((response) => {
+      dispatch(setVehicle(response.data));
     });
   };
 };
