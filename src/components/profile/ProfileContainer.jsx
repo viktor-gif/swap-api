@@ -8,6 +8,8 @@ import {
   clearFilms,
   getVehicle,
   clearVehicles,
+  getHomeworld,
+  clearHomeworld,
 } from "../../redux/profile-reducer";
 import { getPlanets } from "../../redux/people-reducer";
 import { withRouter } from "react-router-dom";
@@ -33,6 +35,9 @@ class ProfileContainer extends React.Component {
           clearFilms={this.props.clearFilms}
           getVehicle={this.props.getVehicle}
           clearVehicles={this.props.clearVehicles}
+          getHomeworld={this.props.getHomeworld}
+          homeworld={this.props.homeworld}
+          clearHomeworld={this.props.clearHomeworld}
         />
       </div>
     );
@@ -45,6 +50,7 @@ let mapStateToProps = (state) => {
     planets: state.peoplePage.planets,
     films: state.profilePage.films,
     vehicles: state.profilePage.vehicles,
+    homeworld: state.profilePage.homeworld,
   };
 };
 
@@ -56,6 +62,8 @@ export default compose(
     clearFilms,
     getVehicle,
     clearVehicles,
+    getHomeworld,
+    clearHomeworld,
   }),
   withRouter
 )(ProfileContainer);

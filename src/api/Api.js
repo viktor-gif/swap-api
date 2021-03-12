@@ -25,6 +25,9 @@ export const profileAPI = {
   getVehicle(api) {
     return axios.get(api);
   },
+  getHomeworld(api) {
+    return axios.get(api);
+  },
 };
 
 // http://swapi.dev/api/planets/?page=2

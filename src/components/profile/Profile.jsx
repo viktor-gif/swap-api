@@ -14,6 +14,8 @@ class Profile extends React.Component {
       this.props.profileData.vehicles.forEach((item) => {
         this.props.getVehicle(item);
       });
+      let homeworld = this.props.profileData.homeworld;
+      this.props.getHomeworld(homeworld);
     }
   }
   componentDidUpdate(prevProps) {
@@ -21,6 +23,7 @@ class Profile extends React.Component {
       if (this.props.profileData) {
         let films = this.props.profileData.films;
         let vehicles = this.props.profileData.vehicles;
+        let homeworld = this.props.profileData.homeworld;
 
         films.forEach((item) => {
           this.props.getFilm(item);
@@ -28,12 +31,14 @@ class Profile extends React.Component {
         vehicles.forEach((item) => {
           this.props.getVehicle(item);
         });
+        this.props.getHomeworld(homeworld);
       }
     }
   }
   componentWillUnmount() {
     this.props.clearFilms();
     this.props.clearVehicles();
+    this.props.clearHomeworld();
   }
 
   render() {
@@ -42,7 +47,8 @@ class Profile extends React.Component {
     const planets = this.props.planets;
     const films = this.props.films;
     const vehicles = this.props.vehicles;
-    console.log(vehicles);
+    const homeworld = this.props.homeworld;
+    console.log(homeworld);
     if (!profileData) {
       return <div>Loading...</div>;
     }
@@ -56,7 +62,11 @@ class Profile extends React.Component {
       return <li key={item.title}>{item.title}</li>;
     });
     const vehiclesNames = vehicles.map((item) => {
-      return <li key={item.name}>{item.name}</li>;
+      return (
+        <li key={item.name}>
+          Name: {item.name}, Model: {item.model}
+        </li>
+      );
     });
 
     return (
@@ -86,12 +96,11 @@ class Profile extends React.Component {
           <b>Gender</b>: {profileData.gender}
         </div>
         <div className={s.personProperty}>
-          <b>HomeWorld</b>:{" "}
-          {planets[indexPlanet] ? planets[indexPlanet].name : "Loading..."}
+          <b>HomeWorld</b>: {homeworld ? homeworld.name : "Loading..."}
         </div>
         <div className={s.personProperty}>
           <b>Vehicles</b>:{" "}
-          {vehicles.length > 0 ? <ul>{vehiclesNames}</ul> : "Loading..."}
+          {vehicles.length > 0 ? <ul>{vehiclesNames}</ul> : "No vehicles"}
         </div>
         <div className={s.personProperty}>
           <b>Films</b>:{" "}
