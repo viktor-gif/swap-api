@@ -15,6 +15,11 @@ const People = (props) => {
           People
         </NavLink>
       </div>
+      <div className={s.item}>
+        <NavLink to="/all-people" activeClassName={s.active}>
+          All people
+        </NavLink>
+      </div>
     </nav>
   );
 };

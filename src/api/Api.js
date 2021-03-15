@@ -12,6 +12,12 @@ export const peopleAPI = {
   },
 };
 
+export const allPeopleAPI = {
+  getAllPeople(url) {
+    return axios.get(url);
+  },
+};
+
 export const profileAPI = {
   getProfile(id) {
     return axios.get(`https://swapi.dev/api/people/${id}`);

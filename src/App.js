@@ -6,6 +6,7 @@ import store from "./redux/redux-store";
 import PeopleContainer from "./components/people/PeopleContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import Header from "./components/header/Header";
+import AllPeopleContainer from "./components/allPeople/AllPeopleContainer";
 
 const App = (props) => {
   return (
@@ -15,6 +16,7 @@ const App = (props) => {
           <Header />
           <Route path={"/profile/:id"} render={() => <ProfileContainer />} />
           <Route path="/people" render={() => <PeopleContainer />} />
+          <Route path="/all-people" render={() => <AllPeopleContainer />} />
         </Provider>
       </HashRouter>
     </div>

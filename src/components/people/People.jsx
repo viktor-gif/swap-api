@@ -64,17 +64,19 @@ const PeopleItems = (props) => {
   if (!props.planets) {
     return <div>Loading</div>;
   }
-
-  let peopleItems = props.people.map((ppl) => {
-    let indexPeople = ppl.url.slice(28, -1);
-    let indexPlanet = +ppl.homeworld.slice(29, -1);
+  if (!props.people) {
+    return <div>Loading</div>;
+  }
+  let peopleItems = props.people.map((p) => {
+    let indexPeople = p.url.slice(28, -1);
+    let indexPlanet = +p.homeworld.slice(29, -1) - 1;
     return (
-      <div key={ppl.name} className={s.person}>
+      <div key={p.name} className={s.person}>
         <NavLink to={"/profile/" + indexPeople}>
           {" "}
-          <div>{ppl.name}</div>
+          <div>{p.name}</div>
         </NavLink>
-        <div>{ppl.gender}</div>
+        <div>{p.gender}</div>
         <div>
           {props.planets[indexPlanet]
             ? props.planets[indexPlanet].name
